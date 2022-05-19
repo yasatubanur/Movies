@@ -11,12 +11,12 @@ import Foundation
 struct MovieResponseModel: Codable {
     let page: Int?
     let results: [MovieDetailModel]?
-    let allPages, totalResults: Int?
+    let totalPages, totalResults: Int?
 
     enum CodingKeys: String, CodingKey {
         case page, results
-        case allPages = "totalPages"
-        case totalResults
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
     }
 }
 
@@ -35,16 +35,16 @@ struct MovieDetailModel: Codable {
 
     enum CodingKeys: String, CodingKey {
         case adult
-        case backdropPath
-        case genreIDS
+        case backdropPath = "backdrop_path"
+        case genreIDS = "genre_ids"
         case id
-        case originalLanguage
-        case originalTitle
+        case originalLanguage = "original_language"
+        case originalTitle = "original_title"
         case overview, popularity
-        case posterPath
-        case releaseDate
+        case posterPath = "poster_path"
+        case releaseDate = "release_date"
         case title, video
-        case voteAverage
-        case voteCount
+        case voteAverage = "vote_average"
+        case voteCount = "vote_count"
     }
 }
