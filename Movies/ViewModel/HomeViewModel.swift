@@ -36,4 +36,8 @@ class HomeViewModel: NSObject {
     func getImagePath(index: IndexPath) -> String? {
         return movie?.results?[index.row].posterPath
     }
+    
+    func getMovieModel(index: IndexPath) -> MovieDetailModel? {
+        return movie?.results?[index.row]
+    }
 }

@@ -46,5 +46,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let vc = DetailViewController()
+        vc.movieModel = viewModel.getMovieModel(index: indexPath)
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
 }
 
