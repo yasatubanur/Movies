@@ -3,23 +3,22 @@
 //  Movies
 //
 //  Created by Yasa, Tuba Nur on 17.05.2022.
-// https://image.tmdb.org/t/p/w500/tlZpSxYuBRoVJBOpUrPdQe9FmFq.jpg
 
 import UIKit
 import Alamofire
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var movie : MovieResponseModel?
-    
     @IBOutlet var movieTableView: UITableView!
+    
+    let viewModel: HomeViewModel = .init() //for object initialization
+    
     override func viewDidLoad() {
         super.viewDidLoad()
       //  overrideUserInterfaceStyle = .dark
         
-        NetworkService.shared.getMovies { [self] movieModel in
-            self.movie  = movieModel
-            movieTableView.reloadData()
+        viewModel.downloadMovies {
+            self.movieTableView.reloadData()
         }
         
         self.movieTableView.dataSource = self
@@ -34,17 +33,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let movie = movie else { return 3 }
-            return movie.results!.count
+        return viewModel.getCellCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = movieTableView.dequeueReusableCell(withIdentifier: "CustomTableViewCell", for: indexPath) as? CustomTableViewCell {
-            let mov = movie?.results
-            cell.movieNameLabel.text = mov?[indexPath.row].title
-            cell.movieOverviewLabel.text = mov?[indexPath.row].overview
-            cell.movieIMDBLabel.text = "\(mov?[indexPath.row].voteAverage ?? 0) / 10"
-            cell.movieImageView.setImage(mov?[indexPath.row].posterPath)
+            cell.movieNameLabel.text = viewModel.getMovieName(index: indexPath)
+            cell.movieOverviewLabel.text = viewModel.getOverviewName(index: indexPath)
+            cell.movieIMDBLabel.text = viewModel.getVoteAverage(index: indexPath)
+            cell.movieImageView.setImage(viewModel.getImagePath(index: indexPath))
             return cell
         }
         return UITableViewCell()
