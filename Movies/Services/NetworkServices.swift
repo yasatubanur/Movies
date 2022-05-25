@@ -14,8 +14,8 @@ class NetworkService{
     init(){}
     
     
-    func getMovies(completionHandler : @escaping (MovieResponseModel) -> Void) {
-        let request = Alamofire.request("https://api.themoviedb.org/3/movie/popular?api_key=9472b59c37b909f4e5c85b3fc12e9c3b&language=en-US&page=1")
+    func getMovies(page: Int, completionHandler : @escaping (MovieResponseModel) -> Void) {
+        let request = Alamofire.request("https://api.themoviedb.org/3/movie/popular?api_key=9472b59c37b909f4e5c85b3fc12e9c3b&language=en-US&page=\(page)")
         request.responseJSON{
             (response) in
            // print(response)

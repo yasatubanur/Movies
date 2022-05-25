@@ -54,5 +54,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let intTotalRow = tableView.numberOfRows(inSection: indexPath.section)
+        
+        if indexPath.row == intTotalRow - 1 {
+            if intTotalRow % 20 == 0 {
+                viewModel.downloadMovies {
+                    self.movieTableView.reloadData()
+                }
+            }
+        }
+    }
 }
 

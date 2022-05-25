@@ -10,9 +10,16 @@ import Foundation
 class HomeViewModel: NSObject {
     private var movie : MovieResponseModel?
     
+    private var current_page = 0
+    
     func downloadMovies(completion: @escaping () -> ()) {
-        NetworkService.shared.getMovies (completionHandler: { movieModel in
-            self.movie  = movieModel
+        current_page += 1
+        NetworkService.shared.getMovies (page: current_page, completionHandler: { movieModel in
+            if self.movie == nil {
+                self.movie = movieModel
+            }else if let newMovies = movieModel.results{
+                self.movie?.results?.append(contentsOf: newMovies)
+            }
             completion()
         })
     }
