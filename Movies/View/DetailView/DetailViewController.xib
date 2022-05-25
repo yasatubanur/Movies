@@ -29,7 +29,7 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="350" id="uOD-23-hQb"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojn-Go-LJH">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="13" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojn-Go-LJH">
                     <rect key="frame" x="50" y="494" width="314" height="318"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="318" id="7eb-Fo-rts"/>

@@ -9,10 +9,9 @@ import Foundation
 
 class HomeViewModel: NSObject {
     private var movie : MovieResponseModel?
-    
     private var current_page = 0
     
-    func downloadMovies(completion: @escaping () -> ()) {
+    func downloadMovies(completion: @escaping Completion) {
         current_page += 1
         NetworkService.shared.getMovies (page: current_page, completionHandler: { movieModel in
             if self.movie == nil {

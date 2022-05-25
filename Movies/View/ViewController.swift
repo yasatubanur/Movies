@@ -5,9 +5,8 @@
 //  Created by Yasa, Tuba Nur on 17.05.2022.
 
 import UIKit
-import Alamofire
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController {
     
     @IBOutlet var movieTableView: UITableView!
     
@@ -15,23 +14,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  overrideUserInterfaceStyle = .dark
-        
+        setupTableView()
         viewModel.downloadMovies {
             self.movieTableView.reloadData()
         }
-        
-        self.movieTableView.dataSource = self
-        self.movieTableView.delegate = self
-        
-        self.registerTableViewCell()
     }
     
-    func registerTableViewCell(){
-        let movieNameField = UINib(nibName: "CustomTableViewCell", bundle: nil)
-        self.movieTableView.register(movieNameField, forCellReuseIdentifier: "CustomTableViewCell")
-    }
+}
 
+
+//MARK: setup tableView
+extension ViewController {
+    func setupTableView() {
+        self.movieTableView.dataSource = self
+        self.movieTableView.delegate = self
+        movieTableView.register(UINib(nibName: CustomTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: CustomTableViewCell.identifier)
+    }
+}
+
+
+//MARK: tableView delegation
+extension ViewController : UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getCellCount()
     }
@@ -67,4 +71,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 }
-
